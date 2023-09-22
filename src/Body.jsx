@@ -39,7 +39,7 @@ function Body() {
   }
 
   return (
-    <div className="flex justify-center ml-60 mt-20">
+    <div className="flex justify-center mt-20">
       <div>
         <div className="fixed left-[550px] z-30 top-6">
           <input
@@ -55,7 +55,7 @@ function Body() {
             }}
           />
           <button
-            className="p-2 bg-slate-500 font-bold text-white"
+            className="p-2  font-bold bg-black text-white"
             onClick={() => {
               fetchData(searchText);
             }}
@@ -64,56 +64,55 @@ function Body() {
           </button>
         </div>
 
-        <div className="">
+        <div className="detail flex relative top-2">
           {data.length != 0 && (
-            <div className="flex mt-1 detail relative -left-36 ">
-              <img className="h-72" src={data.avatar_url} alt="user-image" />
-              <ul className="ml-1 text-sm p-2 w-72">
-                <li className="font-bold  mt-1 border-b-2 border-violet-950 text-slate-600">
-                  Name : <span className="text-purple-950 ">{data.name}</span>
+            <div className="flex flex-1 detail flex-col">
+              <img className="w-[400px]" src={data.avatar_url} alt="user-image" />
+              <ul className="text-center font-bold">
+                <li className="border-b-2 m-1 border-black">
+                  Name : <span className="text-cyan-700">{data.name}</span>
                 </li>
-                <li className="font-bold mt-1 border-b-2 border-violet-950 text-slate-600">
-                  Bio : <span className="text-purple-950">{data.bio}</span>
+                <li className="border-b-2 m-1 w-80 border-black">
+                  Bio : <span className="text-cyan-700">{data.bio}</span>
                 </li>
-                <li className="font-bold mt-1 border-b-2 border-violet-950 text-slate-600">
+                <li className="border-b-2 m-1 border-black">
                   Total Public repos :{" "}
-                  <span className="text-purple-950">{data.public_repos}</span>
+                  <span className="text-cyan-700">{data.public_repos}</span>
                 </li>
-                <li className="font-bold mt-1 text-slate-600 border-b-2 border-violet-950">
-                  Github id :{" "}
-                  <a href={data.url} className="text-purple-950 ">
-                    Catch me!
-                    <FaGithubAlt className="inline mb-1 text-xl ml-1" />
+                <li className="border-b-2 m-1 border-black">
+                  Github id : 
+                  <a href={data.html_url}  className="text-cyan-700 ml-1">
+                     Catch me!
+                    <FaGithubAlt className="inline" />
                   </a>
                 </li>
-                <li className="font-bold mt-1 border-b-2 border-violet-950 text-slate-600">
-                  Date of Creation :{" "}
-                  <span className="text-purple-950">
+                <li className="border-b-2 m-1 border-black">
+                  Date of Creation :
+                  <span className="text-cyan-700">
                     {data.created_at.slice(0, 10)}
                   </span>
                 </li>
-                <li className="font-bold mt-1  border-b-2 border-violet-950 text-slate-600">
-                  Time of Creation :{" "}
-                  <span className="text-purple-950">
+                <li className="border-b-2 m-1 border-black">
+                  Time of Creation :
+                  <span className="text-cyan-700">
                     {data.created_at.slice(11, 19)}
                   </span>
                 </li>
-                <li className="font-bold mt-1 border-b-2 border-violet-950 text-slate-600">
+                <li className="border-b-2 m-1 border-black">
                   Followers :{" "}
-                  <span className="text-purple-950">{data.followers}</span>
+                  <span className="text-cyan-700">{data.followers}</span>
                 </li>
-                <li className="font-bold mt-1 border-b-2 border-violet-950 text-slate-600">
+                <li className="m-1">
                   Following :{" "}
-                  <span className="text-purple-950">{data.following}</span>
+                  <span className="text-cyan-700">{data.following}</span>
                 </li>
               </ul>
             </div>
           )}
-        </div>
-        <div className="flex border-2 detail justify-around relative top-2 w-[600px] mb-24 relative -left-36 flex-wrap">
+<div className="flex flex-wrap detail ml-2">
           {followers.length != 0 && (
-            <h1 className="border-2 w-full text-center bg-white text-black">
-              <span className="text-green-700 font-bold">{data.name}'s</span>{" "}
+            <h1 className="">
+              <span className="">{data.name}'s</span>{" "}
               Followers
             </h1>
           )}
@@ -126,12 +125,14 @@ function Body() {
                     key={obj.id}
                     login={obj.login}
                     imageURL={obj.avatar_url}
-                    githubId={obj.url}
+                    githubId={obj.html_url}
                   />
                 </button>
               );
             })}
         </div>
+        </div>
+        
       </div>
     </div>
   );

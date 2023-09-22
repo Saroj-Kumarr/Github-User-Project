@@ -1,81 +1,19 @@
 import React from "react";
 
-
 function Header() {
-  const bgColor = document.getElementById("main");
-
-  function dark() {
-    bgColor.classList.remove("green", "cyan", "pink", "purple", "white");
-    bgColor.classList.add("black");
-  }
-
-  function green() {
-    bgColor.classList.remove("black", "cyan", "pink", "purple", "white");
-    bgColor.classList.add("green");
-  }
-
-  function light() {
-    bgColor.classList.remove("green", "cyan", "pink", "purple", "black");
-    bgColor.classList.add("white");
-  }
-
-  function purple() {
-    bgColor.classList.remove("green", "cyan", "pink", "black", "white");
-    bgColor.classList.add("purple");
-  }
-
-  function pink() {
-    bgColor.classList.remove("green", "cyan", "black", "purple", "white");
-    bgColor.classList.add("pink");
-  }
-
-  function cyan() {
-    bgColor.classList.remove("green", "black", "pink", "purple", "white");
-    bgColor.classList.add("cyan");
-  }
-
   return (
-    <div className="header  flex bg-slate-300  border-2 p-4 justify-between fixed w-full top-0 z-20 h-20 ">
+    <div className="header  flex bg-cyan-700 border-2 p-4 justify-between fixed w-full top-0 z-20 h-20 ">
       <h1 className="font-bold text-3xl relative left-8 max-[600px]:hidden  max-[600px]:-top-1">
-        Saroj <span className="text-[#155e75]">Kumar</span>
+        Saroj <span className="text-white">Kumar</span>
       </h1>
       <div className=" text-white font-bold absolute right-2 top-4  max-[600px]:mr-3 max-[600px]:mt-1">
-        <button
-          onClick={light}
-          className="border-2 mx-1 border-black text-black bg-white p-1 rounded-lg"
-        >
-          Light
+      <button className="border-2 p-[7px] relative -left-4 border-black bg-white text-black font-bold">
+          Sign-in
         </button>
-        <button
-          onClick={dark}
-          className="border-2 mx-1 text-white bg-black p-1 rounded-lg"
-        >
-          Dark
+        <button className="border-2 border-white p-[6px] bg-black text-white font-bold mr-8">
+          Sign-up
         </button>
-        <button
-          onClick={green}
-          className="border-2 mx-1 text-white bg-[#0f766e] p-1 rounded-lg"
-        >
-          Green
-        </button>
-        <button
-          onClick={purple}
-          className="border-2 mx-1 text-white bg-[#7c3aed] p-1 rounded-lg"
-        >
-          Purple
-        </button>
-        <button
-          onClick={cyan}
-          className="border-2 mx-1 text-white bg-[#155e75] p-1 rounded-lg"
-        >
-          Cyan
-        </button>
-        <button
-          onClick={pink}
-          className="border-2 mx-1 text-white bg-[#f472b6] p-1 rounded-lg"
-        >
-          Pink
-        </button>
+        
       </div>
     </div>
   );
