@@ -64,76 +64,83 @@ function Body() {
           </button>
         </div>
 
-        <div className=" flex relative -left-44">
-          {data.length != 0 && (
-            <div className="flex border-8 botext-white flex-1 fixed z-20 detail flex-col top-[82px]">
-              <img className="w-[330px]" src={data.avatar_url} alt="user-image" />
-              <ul className="text-center font-bold">
-                <li className="border-b-2 m-1 border-black">
-                  Name : <span className="text-white">{data.name}</span>
-                </li>
-                <li className="border-b-2 m-1 w-80 border-black">
-                  Bio : <span className="text-white">{data.bio}</span>
-                </li>
-                <li className="border-b-2 m-1 border-black">
-                  Total Public repos :{" "}
-                  <span className="text-white">{data.public_repos}</span>
-                </li>
-                <li className="border-b-2 m-1 border-black">
-                  Github id : 
-                  <a href={data.html_url}  className="text-white ml-1">
-                     {data.name}'s Github URL
-                  </a>
-                </li>
-                <li className="border-b-2 m-1 border-black">
-                  Date of Creation :
-                  <span className="text-white">
-                    {data.created_at.slice(0, 10)}
-                  </span>
-                </li>
-                <li className="border-b-2 m-1 border-black">
-                  Time of Creation :
-                  <span className="text-white">
-                    {data.created_at.slice(11, 19)}
-                  </span>
-                </li>
-                <li className="border-b-2 m-1 border-black">
-                  Followers :{" "}
-                  <span className="text-white">{data.followers}</span>
-                </li>
-                <li className="m-1">
-                  Following :{" "}
-                  <span className="text-white">{data.following}</span>
-                </li>
-              </ul>
-            </div>
-          )}
-<div className="flex flex-wrap detail  relative left-[350px] flex-col top-9 mb-32 border-2 border-white">
-          {followers.length != 0 && (
-            <h1 className="text-center text-xl h-8 fixed border-2 border-white top-[81px] w-[896px] z-50 bg-cyan-700 font-bold">
-              <span className="text-white">{data.name}'s</span>{" "}
-              Followers
-            </h1>
-          )}
+        {data.length == 0 ? (
+          <span> </span>
+        ) : (
+          <div className=" flex relative -left-44">
+            {data.length != 0 && (
+              <div className="flex border-8 botext-white flex-1 fixed z-20 detail flex-col top-[82px]">
+                <img
+                  className="w-[330px]"
+                  src={data.avatar_url}
+                  alt="user-image"
+                />
+                <ul className="text-center font-bold">
+                  <li className="border-b-2 m-1 border-black">
+                    Name : <span className="text-white">{data.name}</span>
+                  </li>
+                  <li className="border-b-2 m-1 w-80 border-black">
+                    Bio : <span className="text-white">{data.bio}</span>
+                  </li>
+                  <li className="border-b-2 m-1 border-black">
+                    Total Public repos :{" "}
+                    <span className="text-white">{data.public_repos}</span>
+                  </li>
+                  <li className="border-b-2 m-1 border-black">
+                    Github id :
+                    <a href={data.html_url} className="text-white ml-1">
+                      {data.name}'s Github URL
+                    </a>
+                  </li>
+                  <li className="border-b-2 m-1 border-black">
+                    Date of Creation :
+                    <span className="text-white">
+                      {data.created_at.slice(0, 10)}
+                    </span>
+                  </li>
+                  <li className="border-b-2 m-1 border-black">
+                    Time of Creation :
+                    <span className="text-white">
+                      {data.created_at.slice(11, 19)}
+                    </span>
+                  </li>
+                  <li className="border-b-2 m-1 border-black">
+                    Followers :{" "}
+                    <span className="text-white">{data.followers}</span>
+                  </li>
+                  <li className="m-1">
+                    Following :{" "}
+                    <span className="text-white">{data.following}</span>
+                  </li>
+                </ul>
+              </div>
+            )}
 
-         <div className="w-[896px] relative -top-1  pb-2 flex-1">
-         {followers.length != 0 &&
-            followers.map((obj) => {
-              return (
-                <button onClick={() => fetchData(obj.login)}>
-                  <FollowerCompo
-                    key={obj.id}
-                    login={obj.login}
-                    imageURL={obj.avatar_url}
-                    githubId={obj.html_url}
-                  />
-                </button>
-              );
-            })}
-         </div>
-        </div>
-        </div>
-        
+            <div className="flex flex-wrap detail  relative left-[350px] flex-col top-9 mb-32 border-2 border-white">
+              {followers.length != 0 && (
+                <h1 className="text-center text-xl h-8 fixed border-2 border-white top-[81px] w-[896px] z-50 bg-cyan-700 font-bold">
+                  <span className="text-white">{data.name}'s</span> Followers
+                </h1>
+              )}
+
+              <div className="w-[896px] relative -top-1  pb-2 flex-1">
+                {followers.length != 0 &&
+                  followers.map((obj) => {
+                    return (
+                      <button onClick={() => fetchData(obj.login)}>
+                        <FollowerCompo
+                          key={obj.id}
+                          login={obj.login}
+                          imageURL={obj.avatar_url}
+                          githubId={obj.html_url}
+                        />
+                      </button>
+                    );
+                  })}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
