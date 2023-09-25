@@ -67,15 +67,15 @@ function Body() {
         {data.length == 0 ? (
           <span> </span>
         ) : (
-          <div className=" flex relative -left-44">
+          <div className=" flex relative -left-44 ">
             {data.length != 0 && (
-              <div className="flex border-8 botext-white flex-1 fixed z-20 detail flex-col top-[82px]">
+              <div className="flex border-8 botext-white flex-1 fixed z-20 detail h-[590px] overflow-auto flex-col top-[82px]">
                 <img
-                  className="w-[330px]"
+                  className="w-[331px]"
                   src={data.avatar_url}
                   alt="user-image"
                 />
-                <ul className="text-center font-bold">
+                <ul className=" border-2 text-center font-bold">
                   <li className="border-b-2 m-1 border-black">
                     Name : <span className="text-white">{data.name}</span>
                   </li>
