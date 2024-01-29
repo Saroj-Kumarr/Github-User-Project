@@ -1,49 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { DiGithubFull } from "react-icons/di";
-import { FaGithubAlt } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
+
 import FollowerCompo from "./FollowerCompo";
 
-function Body() {
+const Body = () => {
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [followers, setFollowers] = useState([]);
 
-  function fetchData(searchText) {
-    console.log(searchText);
-    axios
-      .get("https://api.github.com/users/" + searchText)
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data);
-        axios
-          .get(res.data.followers_url)
-          .then((res) => {
-            console.log(res.data);
-            setFollowers(res.data);
-            //  res.data.map((obj)=>{
-            //   console.log(obj.login);
-            //   console.log(obj.avatar_url);
-            //   console.log(obj.html_url);
-            //  })
-          })
-          .catch((error) => {
-            console.log("Something went wrong❌");
-          });
-        // console.log(res.data.followers_url);
-      })
-      .catch((error) => {
-        console.log("Something went wrong❌");
-      });
-  }
+  const fetchData = async (searchText) => {
+    const data = await fetch("https://api.github.com/users/" + searchText);
+    const jsonData = await data.json();
+    setData(jsonData);
+
+    const followersData = await fetch(jsonData.followers_url);
+    const jsonFollowersData = await followersData.json();
+    setFollowers(jsonFollowersData);
+  };
 
   return (
     <div className="flex justify-center mt-20">
       <div>
         <div className="fixed left-[550px] z-30 top-6">
           <input
-            className="p-2 w-[350px] "
+            className="p-2 w-[350px] focus:outline-none "
             type="text"
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Enter user name..."
@@ -55,12 +37,12 @@ function Body() {
             }}
           />
           <button
-            className="p-2  font-bold bg-black text-white"
+            className="p-2 relative -top-[1px] font-bold bg-[#5D6D7E] text-white"
             onClick={() => {
               fetchData(searchText);
             }}
           >
-            Search
+            Search <IoSearch className="inline text-2xl -mt-[1px]" />
           </button>
         </div>
 
@@ -118,7 +100,7 @@ function Body() {
 
             <div className="flex flex-wrap detail  relative left-[350px] flex-col top-9 mb-32 border-2 border-white">
               {followers.length != 0 && (
-                <h1 className="text-center text-xl h-8 fixed border-2 border-white top-[81px] w-[896px] z-50 bg-cyan-700 font-bold">
+                <h1 className="text-center text-[#5D6D7E] text-xl h-8 fixed border-2 border-white top-[81px] w-[896px] z-50 bg-[#152D3C] font-bold">
                   <span className="text-white">{data.name}'s</span> Followers
                 </h1>
               )}
@@ -127,14 +109,17 @@ function Body() {
                 {followers.length != 0 &&
                   followers.map((obj) => {
                     return (
-                      <button onClick={() => fetchData(obj.login)}>
+                      <div
+                        className="inline-block"
+                        onClick={() => fetchData(obj.login)}
+                      >
                         <FollowerCompo
                           key={obj.id}
                           login={obj.login}
                           imageURL={obj.avatar_url}
                           githubId={obj.html_url}
                         />
-                      </button>
+                      </div>
                     );
                   })}
               </div>
@@ -144,6 +129,6 @@ function Body() {
       </div>
     </div>
   );
-}
+};
 
 export default Body;
